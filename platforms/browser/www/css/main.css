@@ -22,7 +22,22 @@ body {
     text-align: center;
 }
 
-#coords {
-    padding: 20px;
+#map {
+    margin: 20px 0;
+    border: 1px solid;
+    height: 500px;
+}
+
+#loadingMsg {
+    font-size: 25px;
     text-align: center;
+    padding: 30px 0;
+}
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
 }
