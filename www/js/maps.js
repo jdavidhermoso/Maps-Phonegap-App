@@ -20,11 +20,24 @@
                 accessToken: 'pk.eyJ1IjoiamRhdmlkaGVybW9zbyIsImEiOiJjamF1eDZzMXU2bmN2MzJxZTVzcTR0MTNuIn0.9xsIQGVMQo_G6gvzVDzoMg',
             }).addTo(myMap);
 
+            paintMarker([pos.coords.latitude, pos.coords.longitude], 'Hey! I am here', myMap);
 
+            paintCircle([pos.coords.latitude, pos.coords.longitude], myMap);
+
+            myMap.on('click', function (evt) {
+                var text = 'Marker in l(' + evt.latlng.lat.toFixed(2) + ') and L(' + evt.latlng.lng.toFixed(2) + ')';
+                paintMarker(evt.latlng, text, myMap);
+            });
         },
 
         coordsErrorHandler = function (err) {
             console.log(err.code + ' ' + err.message);
+        },
+
+        paintMarker = function (latLng, text, map) {
+            var marker = L.marker(latLng).addTo(map);
+            marker.bindPopup(text).openPopup();
+
         },
 
         onMapLoaded = function () {
@@ -35,6 +48,15 @@
             loadingMsg.classList.remove('show');
             map.classList.add('show');
             map.classList.remove('hide');
+        },
+
+        paintCircle = function (latLng, map) {
+            var circle = L.circle(latLng, {
+                color: 'red',
+                fillColor: '#f03',
+                fillOpacity: 0.5,
+                radius: 500
+            }).addTo(map);
         };
 
     if ('addEventListener' in document) {
